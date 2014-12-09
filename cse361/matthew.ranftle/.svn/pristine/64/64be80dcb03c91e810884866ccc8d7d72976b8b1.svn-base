@@ -1,0 +1,45 @@
+Name(s):
+
+Table 1. Valgrind Results.
+Number of instructions executed:
+			-O0		-O1		-02		-O3
+compute_totals 	9,013; 3,707; 3,607; 1,805  	       		 
+compute_grades	3,513; 1,231; 1,242; 1,242
+compute_histogram 12,565; 3,708; 3,709; 3,709
+PROGRAM TOTALS 170,394; 153,624; 153,548; 151,740 
+
+Question 1. Name one other thing besides instruction counts that
+valgrind could tell you about your code (if you were to run it with
+different flags):
+valgrind can also be used to detect memory leaks in programs and other objects that may not be accessed by running the code.
+
+
+Table 2. Gprof Results.  //set for loop to 100,000
+Percentage of where your un-optimized code spends its time:
+compute_totals	   	 4.17%			      	       		 
+compute_grades		 16.67%
+compute_histogram	 79.17%
+
+Question 2. Which function will you improve and why?
+I will be improving compute_histogram because it accounts for the majority of my runtime and also includes multiple if statements that are checked every time the function is run. In other words, I don't need to check each individual score with all of the if conditions I currently have. 
+
+Question 3. Describe your improvement in 1-2 sentences:
+I improved compute_histogram by dividing each students score by 50 to determine the correct score_histogram bucket that it should be added to, and then adding to this bucket. Similarly I did the same calculation for grade_tally, except I had to inverse the grades (500-grade) because the buckets index from greatest to least. 
+Table 3. Valgrind Results.
+Number of instructions executed post programmer optimization:
+       	  	       optimized
+compute_totals	1,805	       
+compute_grades	1,242      
+compute_histogram 2,213   
+PROGRAM TOTALS  150,244
+
+Table 4. Gprof Results.
+Percentage of where your optimized code spends its time:
+compute_totals	    	 14.29%			      	       		 
+compute_grades		 28.57%
+compute_histogram	 57.14%
+
+Question 4. Now which function would you try to improve and why?
+
+Now I would try to improve compute_grades because it is is the next slowest running function. The if statements used to place grades could be improved in the same manner as compute_histogram.
+
